@@ -2,13 +2,11 @@ package com.mxsm.easyui;
 
 import java.util.List;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializeConfig;
-import com.alibaba.fastjson.serializer.SerializeFilter;
 import com.mxsm.easyui.datamodel.Combobox;
 import com.mxsm.easyui.datamodel.DataGrid;
+import com.mxsm.easyui.datamodel.Tree;
 import com.mxsm.easyui.datavo.ComboboxData;
 
 /**
@@ -21,6 +19,10 @@ public class EasyUI {
 
 	public static final  String DEFAULT_DATAGRID_JSON =  "{\"total:\"0,\"rows\":[]}";
 	
+	public static final String DEFAULT_COMBOBOX_JSON = "[]";
+	
+	public static final String DEFAULT_TREE_JSON = "[]";
+	
 	/**
 	 * 获取ComboboxJSON格式String,如果data为null或者data 大小等于0 返回[] 否则返回对应的json数据
 	 * @param data
@@ -29,7 +31,7 @@ public class EasyUI {
 	public static String  getComboboxJSONString(List<? extends Combobox> data){
 		
 		if(data == null || data.size() <= 0){
-			return "[]";
+			return DEFAULT_COMBOBOX_JSON;
 		}
 		
 		String _json;
@@ -39,7 +41,7 @@ public class EasyUI {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return "[]";
+			return DEFAULT_COMBOBOX_JSON;
 		}
 		
 		return _json;
@@ -59,7 +61,7 @@ public class EasyUI {
 	public static String getGroupComboboxJSONString(List<? extends Combobox> data){
 		
 		if(data == null || data.size() <= 0){
-			return "[]";
+			return DEFAULT_COMBOBOX_JSON;
 		}
 		
 		String _json;
@@ -69,7 +71,7 @@ public class EasyUI {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return "[]";
+			return DEFAULT_COMBOBOX_JSON;
 		}
 		
 		return _json;
@@ -98,6 +100,21 @@ public class EasyUI {
 	  
    }
    
-   
+   public static String getTreeJSONString(List<? extends Tree> tree){
+	   
+	   if(tree == null || tree.size() <= 0){
+		   
+		   return DEFAULT_TREE_JSON;
+	   }
+	   
+	   try {
+		   return JSONArray.toJSONString(tree);
+	   } catch (Exception e) {
+		// TODO: handle exception
+			e.printStackTrace();
+			return DEFAULT_TREE_JSON;
+	   }
+	   
+   }
    
 }
